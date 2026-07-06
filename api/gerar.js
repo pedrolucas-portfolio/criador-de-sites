@@ -1,67 +1,60 @@
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Método não permitido' });
-  }
+    const temaUsuario = req.body.tema || req.query.tema || "Churrascaria";
 
-  const chaveSecreta = process.env.GROQ_API_KEY;
-  const { promptUsuario } = req.body;
+    const dicionario = {
+        'churrascaria': 'barbecue,meat',
+        'churrasco': 'barbecue,bbq',
+        'pizzaria': 'pizza',
+        'hamburgueria': 'burger,hamburger',
+        'academia': 'gym,fitness',
+        'mecanica': 'motorcycle,mechanic',
+        'salao': 'hairdresser,beauty',
+        'cliente': 'person,face,portrait'
+    };
 
-  const promptSystem = `Você é um designer web premiado e Programador. 
-Crie uma landing page COMPLETA e VISUALMENTE IMPRESSIONANTE para o negócio descrito.
+    const termoBaixo = temaUsuario.toLowerCase().trim();
+    const termoImagemPrincipal = dicionario[termoBaixo] || termoBaixo;
+    const termoImagemCliente = dicionario['cliente'];
 
-Regras de resposta:
-- Responda SOMENTE com HTML e CSS puros integrados.
-- Não use crases, markdown ou explicações.
-- Não use tags <form>.
-- O layout DEVE ser 100% responsivo, adaptando-se para celulares (telas pequenas).
-- O HTML gerado DEVE conter a tag <meta name="viewport" content="width=device-width, initial-scale=1.0"> dentro do <head>.
+    const random1 = Math.floor(Math.random() * 1000);
+    const random2 = Math.floor(Math.random() * 1000);
 
-Regras de IMAGENS (Garantia de funcionamento):
-- Você DEVE usar a tag <img> para ilustrar o negócio (banner principal, produtos, fotos de fundo, avatares de depoimentos).
-- Use obrigatoriamente o serviço LoremFlickr para carregar as fotos sem bloqueios.
-- FORMATO OBRIGATÓRIO PARA IMAGEM GRANDE/HERO: <img src="https://loremflickr.com/800/600/bakery" alt="Imagem do negocio"> (Substitua "bakery" por uma palavra simples em inglês que represente o negócio do usuário, ex: mechanic, gym, pizza, cafe). Use apenas a letra 'x' minúscula para as dimensões.
-- FORMATO OBRIGATÓRIO PARA FOTO DE PERFIL/AVATAR: <img src="https://loremflickr.com/150/150/person" style="border-radius: 50%; width: 70px; height: 70px; object-fit: cover;" alt="Cliente">
-- No CSS, defina sempre max-width: 100%; e height: auto; para as imagens do layout.
+    const urlImagemPrincipal = `https://loremflickr.com/800/500/${termoImagemPrincipal}?random=${random1}`;
+    const urlImagemCliente = `https://loremflickr.com/150/150/${termoImagemCliente}?random=${random2}`;
 
-Regras de INTERAÇÃO:
-- Todos os links de navegação <a> DEVEM usar href="#" e conter obrigatoriamente onclick="event.preventDefault(); alert('Você clicou em uma seção de simulação da página!')".
-- Todos os botões <button> DEVEM conter obrigatoriamente onclick="alert('Ação simulada com sucesso!')".
+    const htmlGerado = `
+        <section class="hero-section" style="background-color: #fceade; padding: 40px 20px; text-align: center;">
+            <div class="container" style="max-width: 600px; margin: 0 auto;">
+                <div class="image-wrapper" style="margin-bottom: 20px;">
+                    <img src="${urlImagemPrincipal}" alt="Imagem de ${temaUsuario}" style="width: 100%; max-width: 400px; border-radius: 8px; display: block; margin: 0 auto;">
+                </div>
+                <h1 style="font-size: 2.5rem; margin-bottom: 10px; text-transform: capitalize;">${temaUsuario}</h1>
+                <p style="font-size: 1.2rem; color: #333; margin-bottom: 20px;">Desfrute do melhor da cidade.</p>
+                <button style="background-color: #800020; color: white; border: none; padding: 12px 24px; font-size: 1rem; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                    Faça sua reserva
+                </button>
+            </div>
+        </section>
 
-Identidade visual:
-- Invente uma paleta de cores única que combine com a essência do negócio.
-- Escolha uma Google Font marcante via @import.
-- Use CSS moderno: gradientes, sombras, animações sutis, layout generoso, tipografia forte.
+        <section class="depoimento-section" style="padding: 40px 20px; background-color: #ffffff; text-align: center;">
+            <div class="container" style="max-width: 600px; margin: 0 auto;">
+                <h2 style="font-size: 2rem; margin-bottom: 20px;">Depoimento de cliente</h2>
+                <div class="card-depoimento" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                    <img src="${urlImagemCliente}" alt="Cliente" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+                    <p style="font-style: italic; color: #555; max-width: 400px; margin: 0;">
+                        "Eu adorei a experiência aqui! O serviço estava muito saboroso e o atendimento foi excelente."
+                    </p>
+                </div>
+            </div>
+        </section>
 
-Estrutura da página:
-- Header com nome do negócio e menu.
-- Hero impactante com imagem contextualizada, título, subtítulo e botão CTA.
-- Seção de diferenciais com emojis ou ícones.
-- Depoimento de cliente com a foto de avatar redonda.
-- Footer com contato.
+        <footer style="background-color: #800020; color: white; padding: 20px; text-align: center;">
+            <div class="container">
+                <p style="margin: 0; font-size: 0.9rem;">Contato: (11) 1234-5678 | <a href="#" style="color: #4a90e2; text-decoration: underline;">enviar e-mail</a></p>
+            </div>
+        </footer>
+    `;
 
-Todo o conteúdo em português, criativo e específico para o negócio.`;
-
-  try {
-    const resposta = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${chaveSecreta}`
-      },
-      body: JSON.stringify({
-        "model": "llama-3.3-70b-versatile",
-        "messages": [
-          { "role": "user", "content": promptUsuario },
-          { "role": "system", "content": promptSystem }
-        ]
-      })
-    });
-
-    const dados = await resposta.json();
-    const textoGerado = dados.choices[0].message.content;
-
-    return res.status(200).json({ content: textoGerado });
-  } catch (erro) {
-    return res.status(500).json({ error: 'Erro ao falar com a IA' });
-  }
+    res.setHeader('Content-Type', 'text/html');
+    return res.status(200).send(htmlGerado);
 }
