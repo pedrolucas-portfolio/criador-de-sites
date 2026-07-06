@@ -10,22 +10,21 @@ export default async function handler(req, res) {
 Crie uma landing page COMPLETA e VISUALMENTE IMPRESSIONANTE para o negócio descrito.
 
 Regras de resposta:
-- Responda SOMENTE com HTML e CSS puros integrados.
+- Responda SOMENTE com HTML e CSS puros integrados dentro do bloco.
 - Não use crases, markdown ou explicações.
 - Não use tags <form>.
 - O layout DEVE ser 100% responsivo, adaptando-se para celulares (telas pequenas).
 - O HTML gerado DEVE conter a tag <meta name="viewport" content="width=device-width, initial-scale=1.0"> dentro do <head>.
 
-Regras de IMAGENS (Estritamente baseadas no negócio):
+Regras de IMAGENS (Links limpos e exatos):
 - Você DEVE usar a tag <img> para ilustrar o negócio (banner principal, produtos, fotos de fundo, avatares de depoimentos).
-- Para a imagem principal (Hero), você DEVE criar a URL usando uma palavra-chave em INGLÊS que combine EXATAMENTE com o negócio digitado pelo usuário.
-- FORMATO OBRIGATÓRIO PARA IMAGEM GRANDE/HERO: <img src="https://images.unsplash.com/featured/800x600/?[TERMO_EM_INGLES]" alt="Imagem do negocio">
-- Exemplos de termos: se o usuário pediu padaria use /?bakery, se pediu oficina use /?mechanic, se pediu pizzaria use /?pizza. Nunca use links fixos de outros negócios.
-- FORMATO OBRIGATÓRIO PARA FOTO DE PERFIL/AVATAR: <img src="https://images.unsplash.com/featured/150x150/?person,portrait" style="border-radius: 50%; width: 70px; height: 70px; object-fit: cover;" alt="Cliente">
+- Para a imagem principal (Hero), crie a URL usando uma palavra-chave simples em INGLÊS baseada no negócio.
+- FORMATO OBRIGATÓRIO PARA IMAGEM GRANDE/HERO: <img src="https://images.unsplash.com/featured/800x600/?coffee" alt="Imagem do negocio"> (Substitua obrigatoriamente "coffee" pelo termo correspondente ao negócio em inglês, ex: bakery, mechanic, gym). Use apenas a letra 'x' minúscula para separar os números da dimensão. Nunca use o caractere de multiplicação '×'.
+- FORMATO OBRIGATÓRIO PARA FOTO DE PERFIL/AVATAR: <img src="https://images.unsplash.com/featured/150x150/?person" style="border-radius: 50%; width: 70px; height: 70px; object-fit: cover;" alt="Cliente">
 - No CSS, defina sempre max-width: 100%; e height: auto; para as imagens do layout.
 
 Regras de INTERAÇÃO:
-- Todos os links de navegação <a> DEVEM usar href="#" e conter obrigatoriamente onclick="event.preventDefault(); alert('Você clicou em uma seção de simulação da página!')".
+- Todos os links de navigation <a> DEVEM usar href="#" e conter obrigatoriamente onclick="event.preventDefault(); alert('Você clicou em uma seção de simulação da página!')".
 - Todos os botões <button> DEVEM conter obrigatoriamente onclick="alert('Ação simulada com sucesso!')".
 
 Identidade visual:
