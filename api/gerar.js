@@ -16,11 +16,11 @@ Regras de resposta:
 - O layout DEVE ser 100% responsivo, adaptando-se para celulares (telas pequenas).
 - O HTML gerado DEVE conter a tag <meta name="viewport" content="width=device-width, initial-scale=1.0"> dentro do <head>.
 
-Regras de IMAGENS (Fotos precisas e temáticas):
+Regras de IMAGENS (Estritamente baseadas no negócio):
 - Você DEVE usar a tag <img> para ilustrar o negócio (banner principal, produtos, fotos de fundo, avatares de depoimentos).
-- Para garantir que as imagens tenham relação DIRETA com o tema do negócio, use a estrutura do Unsplash via redirecionamento de busca por palavra-chave em inglês.
-- FORMATO OBRIGATÓRIO PARA IMAGEM GRANDE/HERO: <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80" alt="Imagem do negocio"> (Caso o tema mude drasticamente, você pode usar termos dinâmicos como: https://images.unsplash.com/featured/800x600/?termo-em-ingles)
-- Exemplo prático: Se for academia use o termo /?gym, se for hamburgueria use /?burger, se for mecânica use /?mechanic.
+- Para a imagem principal (Hero), você DEVE criar a URL usando uma palavra-chave em INGLÊS que combine EXATAMENTE com o negócio digitado pelo usuário.
+- FORMATO OBRIGATÓRIO PARA IMAGEM GRANDE/HERO: <img src="https://images.unsplash.com/featured/800x600/?[TERMO_EM_INGLES]" alt="Imagem do negocio">
+- Exemplos de termos: se o usuário pediu padaria use /?bakery, se pediu oficina use /?mechanic, se pediu pizzaria use /?pizza. Nunca use links fixos de outros negócios.
 - FORMATO OBRIGATÓRIO PARA FOTO DE PERFIL/AVATAR: <img src="https://images.unsplash.com/featured/150x150/?person,portrait" style="border-radius: 50%; width: 70px; height: 70px; object-fit: cover;" alt="Cliente">
 - No CSS, defina sempre max-width: 100%; e height: auto; para as imagens do layout.
 
