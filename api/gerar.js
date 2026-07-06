@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   const { promptUsuario } = req.body;
 
   if (!promptUsuario) {
-    return res.status(400).json({ content: '<h1>Erro: Prompt não enviado</h1>' });
+    return res.status(200).json({ content: '<h1>Erro: Prompt não enviado</h1>' });
   }
 
   const promptSystem = `Você é um designer web premiado e Programador. 
@@ -51,7 +51,7 @@ Todo o conteúdo em português, criativo e específico para o negócio.`;
           { "role": "system", "content": promptSystem }
         ],
         "temperature": 0.2,
-        "max_tokens": 2500
+        "max_tokens": 2300
       })
     });
 
@@ -63,7 +63,7 @@ Todo o conteúdo em português, criativo e específico para o negócio.`;
 
     let textoGerado = dados.choices[0].message.content.trim();
 
-    textoGerated = textoGerado.replace(/```html/gi, "").replace(/```/g, "").trim();
+    textoGerado = textoGerado.replace(/```html/gi, "").replace(/```/g, "").trim();
 
     const posicaoInicio = textoGerado.indexOf("<!DOCTYPE");
     if (posicaoInicio !== -1) {
