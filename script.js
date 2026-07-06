@@ -13,11 +13,12 @@ async function gerarCodigo() {
   let resultado = dados.content;
   
   let espacoCodigo = document.querySelector(".bloco-codigo");
-  let espacoSite = document.querySelector(".bloco-site");
+  let espacoSite = document.getElementById("preview-site");
   
-  espacoCodigo.textContent = resultado.replace(/```html/g, "").replace(/```/g, "").trim();
-  espacoSite.srcdoc = resultado.replace(/```html/g, "").replace(/```/g, "").trim();
+  let codigoLimpo = resultado.replace(/```html/gi, "").replace(/```/g, "").trim();
+  
+  espacoCodigo.textContent = codigoLimpo;
+  espacoSite.srcdoc = codigoLimpo;
   
   console.log(resultado);
 }
-
