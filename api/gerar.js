@@ -1,60 +1,59 @@
 export default async function handler(req, res) {
-    const temaUsuario = req.body.tema || req.query.tema || "Churrascaria";
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Método não permitido' });
+  }
 
-    const dicionario = {
-        'churrascaria': 'barbecue,meat',
-        'churrasco': 'barbecue,bbq',
-        'pizzaria': 'pizza',
-        'hamburgueria': 'burger,hamburger',
-        'academia': 'gym,fitness',
-        'mecanica': 'motorcycle,mechanic',
-        'salao': 'hairdresser,beauty',
-        'cliente': 'person,face,portrait'
-    };
+  const chaveSecreta = process.env.GROQ_API_KEY;
+  const { promptUsuario } = req.body;
 
-    const termoBaixo = temaUsuario.toLowerCase().trim();
-    const termoImagemPrincipal = dicionario[termoBaixo] || termoBaixo;
-    const termoImagemCliente = dicionario['cliente'];
+  const promptSystem = `Você é um designer web premiado e Programador. 
+Crie uma landing page COMPLETA e VISUALMENTE IMPRESSIONANTE para o negócio descrito.
 
-    const random1 = Math.floor(Math.random() * 1000);
-    const random2 = Math.floor(Math.random() * 1000);
+Regras de resposta:
+- Responda SOMENTE com HTML e CSS puros dentro de uma estrutura única.
+- Não use crases, markdown (como \`\`\`html) ou qualquer tipo de explicação antes ou depois do código.
+- Para QUALQUER imagem que a página necessite (como a imagem principal do negócio ou a foto de perfil do depoimento do cliente), você DEVE obrigatoriamente usar a estrutura da tag <img> com a URL do LoremFlickr.
+- O formato da URL deve ser obrigatoriamente: https://loremflickr.com/LARGURA/ALTURA/TAGS?random=NUMERO_ALEATORIO
+- Substitua "TAGS" por termos simples em inglês separados por vírgula que combinem perfeitamente com o negócio ou com o elemento (ex: "barbecue,meat" para churrascaria, "person,face" para o cliente).
+- Adicione sempre o parâmetro ?random= com um número diferente para cada imagem para evitar repetições.
+- O layout DEVE ser 100% responsivo, adaptando-se perfeitamente para celulares (telas pequenas) sem cortar textos ou estourar as laterais.
+- O HTML gerado DEVE conter a tag <meta name="viewport" content="width=device-width, initial-scale=1.0"> dentro do <head>.
 
-    const urlImagemPrincipal = `https://loremflickr.com/800/500/${termoImagemPrincipal}?random=${random1}`;
-    const urlImagemCliente = `https://loremflickr.com/150/150/${termoImagemCliente}?random=${random2}`;
+Identidade visual (capriche e surpreenda):
+- Invente uma paleta de cores única que combine com a essência do negócio.
+- Escolha uma Google Font marcante via @import.
+- Use CSS moderno: gradientes, sombras, animações sutis, layout generoso, tipografia forte.
 
-    const htmlGerado = `
-        <section class="hero-section" style="background-color: #fceade; padding: 40px 20px; text-align: center;">
-            <div class="container" style="max-width: 600px; margin: 0 auto;">
-                <div class="image-wrapper" style="margin-bottom: 20px;">
-                    <img src="${urlImagemPrincipal}" alt="Imagem de ${temaUsuario}" style="width: 100%; max-width: 400px; border-radius: 8px; display: block; margin: 0 auto;">
-                </div>
-                <h1 style="font-size: 2.5rem; margin-bottom: 10px; text-transform: capitalize;">${temaUsuario}</h1>
-                <p style="font-size: 1.2rem; color: #333; margin-bottom: 20px;">Desfrute do melhor da cidade.</p>
-                <button style="background-color: #800020; color: white; border: none; padding: 12px 24px; font-size: 1rem; border-radius: 4px; cursor: pointer; font-weight: bold;">
-                    Faça sua reserva
-                </button>
-            </div>
-        </section>
+Estrutura da página:
+- Header com nome do negócio e menu
+- Hero impactante com título, subtítulo, a imagem principal configurada com o LoremFlickr e botão CTA
+- Seção de diferenciais do negócio
+- Seção de Depoimento de cliente contendo a foto de perfil do cliente em formato redondo (avatar) configurada com o LoremFlickr
+- Footer com contato
 
-        <section class="depoimento-section" style="padding: 40px 20px; background-color: #ffffff; text-align: center;">
-            <div class="container" style="max-width: 600px; margin: 0 auto;">
-                <h2 style="font-size: 2rem; margin-bottom: 20px;">Depoimento de cliente</h2>
-                <div class="card-depoimento" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
-                    <img src="${urlImagemCliente}" alt="Cliente" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-                    <p style="font-style: italic; color: #555; max-width: 400px; margin: 0;">
-                        "Eu adorei a experiência aqui! O serviço estava muito saboroso e o atendimento foi excelente."
-                    </p>
-                </div>
-            </div>
-        </section>
+Todo o conteúdo em português, criativo e específico para o negócio.`;
 
-        <footer style="background-color: #800020; color: white; padding: 20px; text-align: center;">
-            <div class="container">
-                <p style="margin: 0; font-size: 0.9rem;">Contato: (11) 1234-5678 | <a href="#" style="color: #4a90e2; text-decoration: underline;">enviar e-mail</a></p>
-            </div>
-        </footer>
-    `;
+  try {
+    const resposta = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${chaveSecreta}`
+      },
+      body: JSON.stringify({
+        "model": "llama-3.3-70b-versatile",
+        "messages": [
+          { "role": "user", "content": promptUsuario },
+          { "role": "system", "content": promptSystem }
+        ]
+      })
+    });
 
-    res.setHeader('Content-Type', 'text/html');
-    return res.status(200).send(htmlGerado);
+    const dados = await resposta.json();
+    const textoGerado = dados.choices[0].message.content;
+
+    return res.status(200).json({ content: textoGerado });
+  } catch (erro) {
+    return res.status(500).json({ error: 'Erro ao falar com a IA' });
+  }
 }
