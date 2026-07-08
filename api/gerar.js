@@ -17,11 +17,9 @@ Regras de resposta:
 - Responda SOMENTE com HTML e CSS puros dentro de uma estrutura única.
 - Nunca use markdown como \`\`\`html ou \`\`\`. Comece direto no <!DOCTYPE html> e termine em </html>.
 - Não inclua explicações, introduções ou notas fora do código.
-- PROIBIDO usar a tag <img> ou qualquer link externo de imagem. Não use o LoremFlickr.
-- Para substituir as imagens (no Hero e nas seções), use blocos decorativos modernos criados puramente com CSS (divs com gradientes lineares, bordas arredondadas, sombras sutis, formas geométricas ou ícones em formato SVG puro).
-- Para o avatar do depoimento do cliente, use uma div redonda com um gradiente elegante e as iniciais do cliente centralizadas em texto.
-- O layout DEVE ser 100% responsivo para celulares.
-- O HTML gerado DEVE conter a tag <meta name="viewport" content="width=device-width, initial-scale=1.0"> dentro do <head>.
+- PROIBIDO usar a tag <img> ou links de imagens externas.
+- Use EMOJIS GRANDES aplicados de forma moderna e elegante como os elementos visuais principais da página (dentro do Hero, nos diferenciais, etc).
+- O menu de navegação do Header DEVE usar links internos com âncoras comuns (ex: href="#home", href="#features", href="#contato") para que o usuário navegue dentro da própria landing page gerada, NUNCA use links vazios ou href="#" que façam a página principal recarregar.
 
 Identidade visual:
 - Invente uma paleta de cores única que combine com a essência do negócio.
@@ -29,11 +27,10 @@ Identidade visual:
 - Use CSS moderno: gradientes, sombras, animações sutis, layout generoso, tipografia forte.
 
 Estrutura da página:
-- Header com nome do negócio e menu
-- Hero impactante com título, subtítulo, um bloco ilustrativo em CSS/SVG (substituindo a imagem principal) e botão CTA
-- Seção de diferenciais do negócio com ícones geométricos em CSS ou SVG
-- Seção de Depoimento de cliente contendo o avatar em formato redondo feito com gradiente CSS
-- Footer com contato
+- Header com o nome do negócio e menu com links de âncoras funcionais.
+- Hero impactante com título, subtítulo, um emoji gigante tematizado estilizado com CSS e o botão CTA.
+- Seção de diferenciais do negócio destacando os tópicos com emojis grandes e representativos.
+- Footer organizado contendo as informações de contato bem centralizadas.
 
 Todo o conteúdo em português, criativo e específico para o negócio.`;
 
@@ -50,7 +47,7 @@ Todo o conteúdo em português, criativo e específico para o negócio.`;
           { "role": "user", "content": promptUsuario },
           { "role": "system", "content": promptSystem }
         ],
-        "temperature": 0.2,
+        "temperature": 0.4,
         "max_tokens": 2300
       })
     });
