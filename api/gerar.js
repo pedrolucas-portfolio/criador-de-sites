@@ -16,10 +16,11 @@ Crie uma landing page COMPLETA e VISUALMENTE IMPRESSIONANTE para o negócio desc
 Regras de resposta:
 - Responda SOMENTE com HTML e CSS puros dentro de uma estrutura única.
 - Nunca use markdown como \`\`\`html ou \`\`\`. Comece direto no <!DOCTYPE html> e termine em </html>.
-- Não inclua explicações, introduções ou notas.
-- Para QUALQUER imagem que a página necessite, use a tag <img> com a URL do LoremFlickr.
-- O formato da URL deve ser: https://loremflickr.com/LARGURA/ALTURA/TAGS?random=NUMERO_ALEATORIO
-- Substitua "TAGS" por termos simples em inglês baseados no negócio.
+- Não inclua explicações, introduções ou notas fora do código.
+- Para as imagens, você DEVE usar a tag <img> com a URL do LoremFlickr neste formato exato: https://loremflickr.com/LARGURA/ALTURA/TAG_UNICA?random=NUMERO_ALEATORIO
+- ATENÇÃO COM A TAG_UNICA: Use OBRIGATORIAMENTE apenas UMA palavra simples em inglês que defina perfeitamente o elemento. Nunca combine palavras por vírgula. Exemplos: "coffee" para cafeteria, "burger" para hamburgueria, "pizza" para pizzaria, "barbecue" para churrascaria, "gym" para academia, "tools" para mecânica, "salon" para salão de beleza.
+- Para fotos de perfil de depoimentos de clientes, use obrigatoriamente a tag única: "face" ou "portrait".
+- Adicione sempre o parâmetro ?random= com um número diferente para cada imagem para evitar repetições.
 - O layout DEVE ser 100% responsivo para celulares.
 - O HTML gerado DEVE conter a tag <meta name="viewport" content="width=device-width, initial-scale=1.0"> dentro do <head>.
 
