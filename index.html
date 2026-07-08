@@ -15,6 +15,8 @@
 
 <body>
   
+  <header>
+  
   <p class="etiqueta">Gerador com Inteligência Artificial</p>
   
   <h1>
@@ -24,20 +26,22 @@
   </h1>
   
   <p class="subtitulo">Descreva o seu negócio e veja a <abbr>IA</abbr> criar uma página profissional em segundos.</p>
+  </header>
   
-  <div class="caixa-entrada">
+ <main>
+ 
+  <section class="caixa-entrada">
     <textarea class="texto-pagina" placeholder="Descreva o seu negócio. Ex: Cafeteria, Restaurante, Mercado..."></textarea>
     
     <button onclick="gerarCodigo()">Gerar</button>
-  </div>
-  
-  <div class="caixa-resultado">
+    </section>
     
-    <p class="bloco-codigo"></p>
+  <section class="caixa-resultado">
+    
+    <pre><code class="bloco-codigo"></pre></code>
 
         <iframe id="preview-site" class="bloco-site" sandbox="allow-scripts allow-same-origin" style="width: 100%; height: 600px; border: none; background: transparent;"></iframe>
-    
-  </div>
+        </main>
   
   <script src="script.js"></script>
 </body>
