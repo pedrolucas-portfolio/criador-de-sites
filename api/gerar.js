@@ -17,10 +17,9 @@ Regras de resposta:
 - Responda SOMENTE com HTML e CSS puros dentro de uma estrutura única.
 - Nunca use markdown como \`\`\`html ou \`\`\`. Comece direto no <!DOCTYPE html> e termine em </html>.
 - Não inclua explicações, introduções ou notas fora do código.
-- Para as imagens, você DEVE usar a tag <img> com a URL do LoremFlickr neste formato exato: https://loremflickr.com/LARGURA/ALTURA/TAG_UNICA?random=NUMERO_ALEATORIO
-- ATENÇÃO COM A TAG_UNICA: Use OBRIGATORIAMENTE apenas UMA palavra simples em inglês que defina perfeitamente o elemento. Nunca combine palavras por vírgula. Exemplos: "coffee" para cafeteria, "burger" para hamburgueria, "pizza" para pizzaria, "barbecue" para churrascaria, "gym" para academia, "tools" para mecânica, "salon" para salão de beleza.
-- Para fotos de perfil de depoimentos de clientes, use obrigatoriamente a tag única: "face" ou "portrait".
-- Adicione sempre o parâmetro ?random= com um número diferente para cada imagem para evitar repetições.
+- Para as imagens, use a tag <img> com a URL do LoremFlickr neste formato exato: https://loremflickr.com/LARGURA/ALTURA/TAG_UNICA?random=NUMERO
+- A TAG_UNICA deve ser obrigatoriamente APENAS UMA palavra simples em inglês, TODA EM MINÚSCULAS, sem espaços, sem pontos e sem acentos (Exemplos: "coffee", "burger", "pizza", "barbecue", "gym", "tools", "salon").
+- Para fotos de perfil de depoimentos de clientes, use a tag única: "face".
 - O layout DEVE ser 100% responsivo para celulares.
 - O HTML gerado DEVE conter a tag <meta name="viewport" content="width=device-width, initial-scale=1.0"> dentro do <head>.
 
