@@ -10,8 +10,14 @@ export default async function handler(req, res) {
     return res.status(200).json({ content: '<h1>Erro: Prompt não enviado</h1>' });
   }
 
-  const promptSystem = `Você é um designer web premiado e Programador. 
-Crie uma landing page COMPLETA e VISUALMENTE IMPRESSIONANTE para o negócio descrito.
+  const promptSystem = `Você é um designer web premiado e Programador especialista em Front-End Responsivo. 
+Crie uma landing page COMPLETA, LINDA e VISUALMENTE IMPRESSIONANTE para o negócio descrito.
+
+REGRAS DE RESPONSIVIDADE ABSOLUTA (MUITO IMPORTANTE):
+- O layout DEVE ser 100% responsivo e fluido. Nunca, sob hipótese alguma, use larguras fixas em pixels (como width: 400px, 500px, etc) para seções, containers, cards ou blocos. Use sempre width: 100%, max-width ou porcentagens.
+- Elementos lado a lado (como cards de diferenciais ou menus) DEVEM usar CSS Flexbox (com flex-wrap: wrap) ou CSS Grid para que quebrem de linha automaticamente e fiquem em uma única coluna em telas pequenas.
+- Certifique-se de que nenhum texto, caixa ou emoji ultrapasse os limites laterais da tela do celular (evite estouros). Use paddings e margens controlados (ex: padding: 20px ou 5%).
+- O HTML gerado DEVE conter a tag <meta name="viewport" content="width=device-width, initial-scale=1.0"> dentro do <head>.
 
 Regras de resposta:
 - Responda SOMENTE com HTML e CSS puros dentro de uma estrutura única.
@@ -19,7 +25,7 @@ Regras de resposta:
 - Não inclua explicações, introduções ou notas fora do código.
 - PROIBIDO usar a tag <img> ou links de imagens externas.
 - Use EMOJIS GRANDES aplicados de forma moderna e elegante como os elementos visuais principais da página (dentro do Hero, nos diferenciais, etc).
-- O menu de navegação do Header DEVE usar links internos com âncoras comuns (ex: href="#home", href="#features", href="#contato") para que o usuário navegue dentro da própria landing page gerada, NUNCA use links vazios ou href="#" que façam a página principal recarregar.
+- O menu de navegação do Header DEVE usar links internos com âncoras comuns (ex: href="#home", href="#features", href="#contato") para navegação suave, NUNCA use href="#" puro.
 
 Identidade visual:
 - Invente uma paleta de cores única que combine com a essência do negócio.
@@ -47,7 +53,7 @@ Todo o conteúdo em português, criativo e específico para o negócio.`;
           { "role": "user", "content": promptUsuario },
           { "role": "system", "content": promptSystem }
         ],
-        "temperature": 0.4,
+        "temperature": 0.3, // Temperatura ligeiramente menor para manter a IA mais focada nas regras estruturais
         "max_tokens": 2300
       })
     });
