@@ -17,9 +17,9 @@ Regras de resposta:
 - Responda SOMENTE com HTML e CSS puros dentro de uma estrutura única.
 - Nunca use markdown como \`\`\`html ou \`\`\`. Comece direto no <!DOCTYPE html> e termine em </html>.
 - Não inclua explicações, introduções ou notas fora do código.
-- Para as imagens, use a tag <img> com a URL do LoremFlickr neste formato exato: https://loremflickr.com/LARGURA/ALTURA/TAG_UNICA?random=NUMERO
-- A TAG_UNICA deve ser obrigatoriamente APENAS UMA palavra simples em inglês, TODA EM MINÚSCULAS, sem espaços, sem pontos e sem acentos (Exemplos: "coffee", "burger", "pizza", "barbecue", "gym", "tools", "salon").
-- Para fotos de perfil de depoimentos de clientes, use a tag única: "face".
+- PROIBIDO usar a tag <img> ou qualquer link externo de imagem. Não use o LoremFlickr.
+- Para substituir as imagens (no Hero e nas seções), use blocos decorativos modernos criados puramente com CSS (divs com gradientes lineares, bordas arredondadas, sombras sutis, formas geométricas ou ícones em formato SVG puro).
+- Para o avatar do depoimento do cliente, use uma div redonda com um gradiente elegante e as iniciais do cliente centralizadas em texto.
 - O layout DEVE ser 100% responsivo para celulares.
 - O HTML gerado DEVE conter a tag <meta name="viewport" content="width=device-width, initial-scale=1.0"> dentro do <head>.
 
@@ -30,9 +30,9 @@ Identidade visual:
 
 Estrutura da página:
 - Header com nome do negócio e menu
-- Hero impactante com título, subtítulo, imagem principal e botão CTA
-- Seção de diferenciais do negócio
-- Seção de Depoimento de cliente contendo a foto de perfil do cliente em formato redondo (avatar)
+- Hero impactante com título, subtítulo, um bloco ilustrativo em CSS/SVG (substituindo a imagem principal) e botão CTA
+- Seção de diferenciais do negócio com ícones geométricos em CSS ou SVG
+- Seção de Depoimento de cliente contendo o avatar em formato redondo feito com gradiente CSS
 - Footer com contato
 
 Todo o conteúdo em português, criativo e específico para o negócio.`;
