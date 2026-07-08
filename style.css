@@ -14,8 +14,16 @@ body {
   align-items: center;
   outline: none;
 }
+
 .etiqueta {
   color: #ffffff;
+  background: #18181b;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #27272a;
+  margin-bottom: 16px;
 }
 
 h1 {
@@ -23,6 +31,7 @@ h1 {
   font-weight: 800;
   color: #fafafa;
   text-align: center;
+  line-height: 1.2;
 }
 
 span {
@@ -30,11 +39,11 @@ span {
   text-align: center;
 }
 
-
 .subtitulo {
   color: #71717a;
   margin-top: 16px;
   font-size: 18px;
+  text-align: center;
 }
 
 .caixa-entrada {
@@ -45,10 +54,12 @@ span {
   padding: 12px;
   margin-top: 30px;
   display: flex;
+  border: 1px solid #27272a;
 }
 
 textarea {
   width: 80%;
+  height: 50px;
   resize: none;
   outline: none;
   background: transparent;
@@ -67,6 +78,11 @@ button {
   border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #6d28d9;
 }
 
 .caixa-resultado {
@@ -91,10 +107,13 @@ button {
   overflow: auto;
   border-radius: 12px;
   border: 1px solid #27272a;
+  min-height: 600px;
+  max-height: 600px;
 }
 
 .bloco-site {
   width: 70%;
+  height: 600px;
   border: 1px solid #27272a;
   border-radius: 12px;
   background-color: #1e1e1e;
@@ -103,6 +122,23 @@ button {
 /* --- Regras para Celular --- */
 
 @media (max-width: 768px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  .caixa-entrada {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+
   .caixa-resultado {
     flex-direction: column;
     padding: 12px;
@@ -110,24 +146,13 @@ button {
 
   .bloco-codigo {
     width: 100%;
+    min-height: 200px;
     max-height: 250px;
   }
 
   .bloco-site {
     width: 100%;
-    min-height: 450px;
-  }
-  
-    .bloco-site html, .bloco-site body {
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  .bloco-site h1 {
-    font-size: 28px !important;
-  }
-
-  .bloco-site .hero, .bloco-site .container {
-    padding: 20px 10px !important;
+    min-height: 500px;
+    height: 500px;
   }
 }
