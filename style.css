@@ -97,8 +97,14 @@ button:hover {
   gap: 24px;
 }
 
+pre{
+  width:30%;
+  margin: 0;
+}
+
 .bloco-codigo {
-  width: 30%;
+ display: block;
+  width: 100%;
   background: #0c0c0f;
   padding: 20px;
   font-size: 12px;
@@ -144,6 +150,10 @@ button:hover {
     padding: 12px;
   }
 
+  pre{
+    width: 100%;
+  }
+  
   .bloco-codigo {
     width: 100%;
     min-height: 200px;
@@ -155,4 +165,4 @@ button:hover {
     min-height: 500px;
     height: 500px;
   }
-}
+  
